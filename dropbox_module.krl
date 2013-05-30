@@ -7,9 +7,12 @@ Functions and actions for using Dropbox from a KRl ruleset.
     author "Phil Windley"
     logging off
 
-    config using app_key, app_secret, access_token, access_token_secret
+    configure using app_key = "" and
+                    app_secret = "" and
+ 		    access_token = "" and
+		    access_token_secret = ""
 
-    provides create_oauth_header_value, raw_core_api_call, core_api_call, get_request_token, get_access_token, generate_authorization_url, decode_content
+    provides create_oauth_header_value, raw_core_api_call, core_api_call, get_request_token, get_access_token, generate_authorization_url, decode_content, is_authorized
   }
 
   global {
@@ -67,7 +70,7 @@ Functions and actions for using Dropbox from a KRl ruleset.
       "https://www.dropbox.com/1/oauth/authorize?oauth_token=" + oauth_token + "&oauth_callback=" + callback;
     }
 
-    is_authorized = function {
+    is_authorized = function() {
         account_info_result = raw_core_api_call('/account/info');
 	account_info_result{'status_code'} eq '200';
     }	
