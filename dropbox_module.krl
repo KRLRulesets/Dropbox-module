@@ -27,13 +27,13 @@ Functions and actions for using Dropbox from a KRl ruleset.
        '"'; //" 
     }
 
-    raw_core_api_call = function(method, tokens) {
+    raw_core_api_call = function(method, tokensx) {
       http:get(dropbox_base_url+method, 
                {},
                {"Authorization" : create_oauth_header_value(app_key, 
 	                                                    app_secret, 
-							    tokens{'access_token'}, 
-							    tokens{'access_token_secret'})
+							    tokensx{'access_token'}, 
+							    tokensx{'access_token_secret'})
 	       });
     }
 
@@ -68,8 +68,8 @@ Functions and actions for using Dropbox from a KRl ruleset.
       "https://www.dropbox.com/1/oauth/authorize?oauth_token=" + oauth_token + "&oauth_callback=" + callback;
     }
 
-    is_authorized = function(tokens) {
-        account_info_result = raw_core_api_call('/account/info', tokens);
+    is_authorized = function(tokensy) {
+        account_info_result = raw_core_api_call('/account/info', tokensy);
 	account_info_result{'status_code'} eq '200';
     }	
 
