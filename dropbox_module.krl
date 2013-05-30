@@ -5,12 +5,10 @@ ruleset dropbox_module {
 Functions and actions for using Dropbox from a KRl ruleset. 
     >>
     author "Phil Windley"
-    logging off
+    logging on
 
     configure using app_key = "" and
-                    app_secret = "" and
- 		    access_token = "" and
-		    access_token_secret = ""
+                    app_secret = "" 
 
     provides create_oauth_header_value, raw_core_api_call, core_api_call, get_request_token, get_access_token, generate_authorization_url, decode_content, is_authorized
   }
@@ -29,18 +27,18 @@ Functions and actions for using Dropbox from a KRl ruleset.
        '"'; //" 
     }
 
-    raw_core_api_call = function(method) {
+    raw_core_api_call = function(method, tokens) {
       http:get(dropbox_base_url+method, 
                {},
                {"Authorization" : create_oauth_header_value(app_key, 
 	                                                    app_secret, 
-							    access_token, 
-							    access_token_secret)
+							    tokens{'access_token'}, 
+							    tokens{'access_token_secret'})
 	       });
     }
 
-    core_api_call = function(method) {
-      result = raw_core_api_call(method);
+    core_api_call = function(method, tokens) {
+      result = raw_core_api_call(method, tokens);
       result{'content'}.decode();
     }
 
@@ -70,8 +68,8 @@ Functions and actions for using Dropbox from a KRl ruleset.
       "https://www.dropbox.com/1/oauth/authorize?oauth_token=" + oauth_token + "&oauth_callback=" + callback;
     }
 
-    is_authorized = function() {
-        account_info_result = raw_core_api_call('/account/info');
+    is_authorized = function(tokens) {
+        account_info_result = raw_core_api_call('/account/info', tokens);
 	account_info_result{'status_code'} eq '200';
     }	
 
