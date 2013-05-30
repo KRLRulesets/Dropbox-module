@@ -27,13 +27,13 @@ Functions and actions for using Dropbox from a KRl ruleset.
        '"'; //" 
     }
 
-    raw_core_api_call = function(method, tokensx) {
+    raw_core_api_call = function(method, tokens) {
       http:get(dropbox_base_url+method, 
                {},
                {"Authorization" : create_oauth_header_value(app_key, 
 	                                                    app_secret, 
-							    tokensx{'access_token'}, 
-							    tokensx{'access_token_secret'})
+							    tokens{'access_token'}, 
+							    tokens{'access_token_secret'})
 	       });
     }
 
@@ -43,6 +43,7 @@ Functions and actions for using Dropbox from a KRl ruleset.
     }
 
     get_request_token = defaction() {
+      y =  create_oauth_header_value(app_key, app_secret);
       http:post(dropbox_base_url+"/oauth/request_token") with
         body = {} and
         headers = {"Authorization" : create_oauth_header_value(app_key, app_secret)
@@ -68,8 +69,8 @@ Functions and actions for using Dropbox from a KRl ruleset.
       "https://www.dropbox.com/1/oauth/authorize?oauth_token=" + oauth_token + "&oauth_callback=" + callback;
     }
 
-    is_authorized = function(tokensy) {
-        account_info_result = raw_core_api_call('/account/info', tokensy);
+    is_authorized = function(tokens) {
+        account_info_result = raw_core_api_call('/account/info', tokens);
 	account_info_result{'status_code'} eq '200';
     }	
 
