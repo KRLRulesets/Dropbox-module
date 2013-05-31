@@ -7,8 +7,8 @@ Functions and actions for using Dropbox from a KRl ruleset.
     author "Phil Windley"
     logging on
 
-    configure using app_key = "" and
-                    app_secret = "" 
+    configure using app_key = "no key given" and
+                    app_secret = "no secret given" 
 
     provides create_oauth_header_value, raw_core_api_call, core_api_call, get_request_token, get_access_token, generate_authorization_url, decode_content, is_authorized, foo
   }
@@ -32,8 +32,8 @@ Functions and actions for using Dropbox from a KRl ruleset.
     raw_core_api_call = function(method, tokens) {
       http:get(dropbox_base_url+method, 
                {},
-               {"Authorization" : create_oauth_header_value(tokens{'app_key'}, 
-	                                                    tokens{'app_secret'}, 
+               {"Authorization" : create_oauth_header_value(app_key, 
+	                                                    app_secret, 
 							    tokens{'access_token'}, 
 							    tokens{'access_token_secret'})
 	       });
@@ -47,8 +47,8 @@ Functions and actions for using Dropbox from a KRl ruleset.
     get_request_token = defaction(tokens) {
       http:post(dropbox_base_url+"/oauth/request_token") with
         body = {} and
-        headers = {"Authorization" : create_oauth_header_value(tokens{'app_key'}, 
-	                                                       tokens{'app_secret'})
+        headers = {"Authorization" : create_oauth_header_value(app_key, 
+	                                                       app_secret)
 		  } and
         autoraise = "request_token"
     }
@@ -57,8 +57,8 @@ Functions and actions for using Dropbox from a KRl ruleset.
     get_access_token = defaction(tokens) {
       http:post(dropbox_base_url+"/oauth/access_token") with
         body = {} and
-        headers = {"Authorization" : create_oauth_header_value(tokens{'app_key'}, 
-	                                                       tokens{'app_secret'}, 
+        headers = {"Authorization" : create_oauth_header_value(app_key, 
+	                                                       app_secret, 
 							       tokens{'request_token'}, 
 							       tokens{'request_token_secret'})
 		  } and
