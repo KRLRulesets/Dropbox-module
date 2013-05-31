@@ -7,6 +7,9 @@ Functions and actions for using Dropbox from a KRl ruleset.
     author "Phil Windley"
     logging on
 
+    configure using app_key = "" and
+                    app_secret = "" 
+
     provides create_oauth_header_value, raw_core_api_call, core_api_call, get_request_token, get_access_token, generate_authorization_url, decode_content, is_authorized, foo
   }
 
