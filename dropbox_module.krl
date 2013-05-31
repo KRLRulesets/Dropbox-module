@@ -32,8 +32,8 @@ Functions and actions for using Dropbox from a KRl ruleset.
     raw_core_api_call = function(method, tokens) {
       http:get(dropbox_base_url+method, 
                {},
-               {"Authorization" : create_oauth_header_value(app_key, 
-	                                                    app_secret, 
+               {"Authorization" : create_oauth_header_value(tokens{'app_key'}, 
+	                                                    tokens{'app_secret'}, 
 							    tokens{'access_token'}, 
 							    tokens{'access_token_secret'})
 	       });
@@ -44,22 +44,23 @@ Functions and actions for using Dropbox from a KRl ruleset.
       result{'content'}.decode();
     }
 
-    get_request_token = defaction() {
+    get_request_token = defaction(tokens) {
       http:post(dropbox_base_url+"/oauth/request_token") with
         body = {} and
-        headers = {"Authorization" : create_oauth_header_value(app_key, app_secret)
+        headers = {"Authorization" : create_oauth_header_value(tokens{'app_key'}, 
+	                                                       tokens{'app_secret'})
 		  } and
         autoraise = "request_token"
     }
 
 
-    get_access_token = defaction(request_token, request_token_secret) {
+    get_access_token = defaction(tokens) {
       http:post(dropbox_base_url+"/oauth/access_token") with
         body = {} and
-        headers = {"Authorization" : create_oauth_header_value(app_key, 
-	                                                       app_secret, 
-							       request_token, 
-							       request_token_secret)
+        headers = {"Authorization" : create_oauth_header_value(tokens{'app_key'}, 
+	                                                       tokens{'app_secret'}, 
+							       tokens{'request_token'}, 
+							       tokens{'request_token_secret'})
 		  } and
         autoraise = "access_token"		   
 
