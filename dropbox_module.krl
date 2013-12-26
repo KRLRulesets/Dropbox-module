@@ -46,7 +46,7 @@ Functions and actions for using Dropbox from a KRl ruleset.
       result{'content'}.decode();
     }
 
-    get_request_token = defaction(tokens) {
+    get_request_token = defaction() {
       http:post(dropbox_base_url+"/oauth/request_token") with
         body = {} and
         headers = {"Authorization" : create_oauth_header_value(app_key, 
