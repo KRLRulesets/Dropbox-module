@@ -63,8 +63,7 @@ Checks to make sure we got request tokens back from Dropbox
                };
     }
     if(! tokens{'oauth_token'}.isnull() && 
-       ! tokens{'oauth_token'}.isnull())
-    {
+       ! tokens{'oauth_token'}.isnull()) then {
       show_test:diag("processing request token", values);
     }
     fired {
@@ -81,7 +80,7 @@ Checks to make sure we got request tokens back from Dropbox
         test_desc = test_desc and
         rulename = meta:ruleName() and
 	msg = "request tokens are empty" and
-	details = values
+	details = values;
 
       log "<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
       log "Tokens: " + tokens.encode();
