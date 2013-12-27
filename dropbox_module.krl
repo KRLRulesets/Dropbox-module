@@ -29,7 +29,7 @@ Functions and actions for using Dropbox from a KRl ruleset.
 
     app_host = "squaretag.com";
 
-    foo = function () {create_oauth_header_value(app_key, app_secret)};
+    foo = function (tokens) {create_oauth_header_value(app_key, app_secret, tokens)};
 
     raw_core_api_call = function(method, tokens) {
       http:get(dropbox_base_url+method, 
