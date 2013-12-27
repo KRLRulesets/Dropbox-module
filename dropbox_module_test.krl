@@ -50,6 +50,10 @@ Test the Dropbox module
   rule process_request_token {
     select when http post label "request_token"
     pre {
+      test_desc = <<
+Checks to make sure we got request tokens back from Dropbox
+>>;
+
       tokens = event:attr("status_code") eq '200' => dropbox:decode_content(event:attr('content')) | {};
 
       url = dropbox:generate_authorization_url(tokens{'oauth_token'} || 'NO_TOKEN');
@@ -58,17 +62,32 @@ Test the Dropbox module
 		'http_response' : event:attrs()
                };
     }
+    if(! tokens{'oauth_token'}.isnull() && 
+       ! tokens{'oauth_token'}.isnull())
     {
       show_test:diag("processing request token", values);
     }
-    always {
+    fired {
+      raise test event succeeds with
+        test_desc = test_desc and
+        rulename = meta:ruleName() and
+	msg = "request tokens are defined" and
+	details = values;
+
+      set ent:request_token_secret tokens{'oauth_token_secret'};
+      set ent:request_token tokens{'oauth_token'};
+    } else {
+      raise test event fails with
+        test_desc = test_desc and
+        rulename = meta:ruleName() and
+	msg = "request tokens are empty" and
+	details = values
+
       log "<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
       log "Tokens: " + tokens.encode();
       log "Callback URL: " + url;
       log "Event attrs: " + event:attrs().encode();
       log "<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
-      set ent:request_token_secret tokens{'oauth_token_secret'};
-      set ent:request_token tokens{'oauth_token'};
       last;
     }
   }
