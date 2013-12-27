@@ -57,13 +57,13 @@ Functions and actions for using Dropbox from a KRl ruleset.
     }
 
 
-    get_access_token = defaction(tokens) {
+    get_access_token = defaction(request_token, request_token_secret) {
       http:post(dropbox_base_url+"/oauth/access_token") with
         body = {} and
         headers = {"Authorization" : create_oauth_header_value(app_key, 
 	                                                       app_secret, 
-							       tokens{'request_token'}, 
-							       tokens{'request_token_secret'})
+							       request_token, 
+							       request_token_secret)
 		  } and
         autoraise = "access_token"		   
 
