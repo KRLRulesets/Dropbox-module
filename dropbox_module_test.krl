@@ -44,7 +44,6 @@ Test the Dropbox module
       log "Tokens: " + my_tokens.encode();
       log "Header: " + dropbox:return_header(my_tokens);
       log "<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
-      last;
     }
   }
 
@@ -54,15 +53,13 @@ Test the Dropbox module
       tokens = event:attr("status_code") eq '200' => dropbox:decode_content(event:attr('content')) | {};
 
       url = dropbox:generate_authorization_url(tokens{'oauth_token'} || 'NO_TOKEN');
-      my_html = <<
-<div style="margin: 0px 0px 20px 20px">
-<a href="#{url}" class="btn btn-large btn-primary">Click to Link to Dropbox<a>
-</div>
->>;
+      values = {'request_tokens' : tokens,
+                'authorization_url' : url,
+		'http_response' : event:attrs()
+               };
     }
     {
-//      notify("Link to Dropbox", tokens.encode() + '<br/>' + url) with sticky=true;
-      CloudRain:createLoadPanel("Link to Dropbox", {}, my_html);
+      show_test:diag("processing request token", values);
     }
     always {
       log "<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";

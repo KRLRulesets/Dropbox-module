@@ -10,5 +10,5 @@ test_1:
    attributes:
      foo: bar
    rids:
-    - b503129x1.prod
+    - b16x6.prod
      
