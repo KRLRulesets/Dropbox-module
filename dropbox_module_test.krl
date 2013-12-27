@@ -39,7 +39,7 @@ Test the Dropbox module
       show_test:diag("test initiation", values);
     }  
 
-    fired{
+    always {
       log "<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
       log "Tokens: " + my_tokens.encode();
       log "Header: " + dropbox:return_header(my_tokens);
