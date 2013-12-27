@@ -62,8 +62,8 @@ Checks to make sure we got request tokens back from Dropbox
 		'http_response' : event:attrs()
                };
     }
-    if(! tokens{'oauth_token'}.isnull() && 
-       ! tokens{'oauth_token'}.isnull()) then {
+    if(not tokens{'oauth_token'}.isnull() && 
+       not tokens{'oauth_token'}.isnull()) then {
       show_test:diag("processing request token", values);
     }
     fired {
