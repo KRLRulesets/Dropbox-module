@@ -1,17 +1,17 @@
-ruleset dropbox_module_test {
+ruleset dropbox_module_example {
   meta {
-    name "Dropbox module test"
+    name "Dropbox module example"
     description <<
-Test the Dropbox module
+Shows how to use the Dropbox module
 >>
     author "Phil Windley"
     logging on
-    
+
+    use module a169x701 alias CloudRain
     use module b16x5 alias dropbox_keys
     use module b16x0 alias dropbox with
          app_key = keys:dropbox('app_key') and	   
          app_secret = keys:dropbox('app_secret')
-    use module b503129x0 alias show_test
 
   }
 
@@ -25,18 +25,11 @@ Test the Dropbox module
 
   }
 
-  rule get_request_token_test { 
-    select when test get_request_token
-
-    pre {
-      values = {'tokens' : my_tokens,
-                'header' : dropbox:return_header(my_tokens)
-               };
-    }   
+  rule get_request_token { 
+    select when web cloudAppSelected
 
     if(not authorized) then {
       dropbox:get_request_token();	   
-      show_test:diag("test initiation", values);
     }  
 
     fired{
@@ -44,7 +37,6 @@ Test the Dropbox module
       log "Tokens: " + my_tokens.encode();
       log "Header: " + dropbox:return_header(my_tokens);
       log "<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
-      last;
     }
   }
 
