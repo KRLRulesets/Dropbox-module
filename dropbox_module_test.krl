@@ -17,8 +17,8 @@ Test the Dropbox module
 
   global {
 
-    my_tokens = {'access_token' : ent:access_token,
-              	 'access_token_secret' : ent: access_token_secret
+    my_tokens = {'access_token' : ent:access_token || '',
+              	 'access_token_secret' : ent: access_token_secret || ''
 	     	};
 
     authorized = dropbox:is_authorized(my_tokens);
