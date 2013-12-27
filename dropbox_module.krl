@@ -69,7 +69,7 @@ Functions and actions for using Dropbox from a KRl ruleset.
     }
 
     generate_authorization_url = function(oauth_token) {
-      callback = 'http://' + app_host + '/blue/event/oauth/response/' + meta:rid() + '/' + math:random(999999);
+      callback = 'http://' + meta:host() + '/blue/event/oauth/response/' + meta:rid() + '/' + math:random(999999);
       "https://www.dropbox.com/1/oauth/authorize?oauth_token=" + oauth_token + "&oauth_callback=" + callback;
     }
 
