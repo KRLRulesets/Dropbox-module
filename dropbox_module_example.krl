@@ -23,6 +23,23 @@ Shows how to use the Dropbox module
 
     authorized = dropbox:is_authorized(my_tokens);
 
+    dropbox_get_file = function(filename, chunk) {
+      chunk_size = 100;
+      first_byte_offset = chunk * chunk_size;
+      last_byte_offset = first_byte_offset + (chunk_size-1);
+      http:get('https://api-content.dropbox.com/1/files/sandbox/' + filename,
+            {},
+      	    {"Authorization" : create_oauth_header_value(
+	        keys:dropbox('app_key'),
+ 	        keys:dropbox('app_secret'),
+	        my_tokens{'access_token'}, 
+		my_tokens{'access_token_secret'}),
+
+             "Range" : 'bytes=' + first_byte_offset + '-' + last_byte_offset
+            })
+    }
+
+
   }
 
   rule get_request_token { 
