@@ -32,20 +32,20 @@ Shows how to use the Dropbox module
       first_byte_offset = chunk * chunk_size;
       last_byte_offset = first_byte_offset + (chunk_size-1);
 
-      values = "Tokens: " + my_tokens.encode() + "\n" +
-                  "Dropbox keys" + keys:dropbox('app_key') + " ; " + keys:dropbox("app_secret") + "\n" +
-                  "Header: " + dropbox:return_header(my_tokens);
-      values
-     //   http:get('https://api-content.dropbox.com/1/files/sandbox/' + filename,
-     //         {},
-     //   	    {"Authorization" : create_oauth_header_value(
-     // 	        keys:dropbox('app_key'),
-     // 	        keys:dropbox('app_secret'),
-     // 	        my_tokens{'access_token'}, 
-     // 		my_tokens{'access_token_secret'}),
+       // values = "Tokens: " + my_tokens.encode() + "\n" +
+       //             "Dropbox keys" + keys:dropbox('app_key') + " ; " + keys:dropbox("app_secret") + "\n" +
+       //             "Header: " + dropbox:return_header(my_tokens);
+       // values
 
-     //          "Range" : 'bytes=' + first_byte_offset + '-' + last_byte_offset
-     //         })
+        http:get('https://api-content.dropbox.com/1/files/sandbox/' + filename,
+     	         {},
+        	 {"Authorization" : create_oauth_header_value(
+      	         		       keys:dropbox('app_key'),
+      	        		       keys:dropbox('app_secret'),
+      	        		       my_tokens{'access_token'}, 
+      				       my_tokens{'access_token_secret'}),
+                  "Range" : 'bytes=' + first_byte_offset + '-' + last_byte_offset
+              })
      }
 
 
