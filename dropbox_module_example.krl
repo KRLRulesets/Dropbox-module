@@ -52,8 +52,7 @@ Shows how to use the Dropbox module
 
       value_info = dropbox:core_api_call('/metadata/sandbox/?list=true', my_tokens);
 
-      itemName   = makeItemName("BBB", "png");
-      itemURL    = AWSS3:makeAwsUrl("kynetx-images",itemName);
+      itemURL    = AWSS3:makeAwsUrl("kynetx-images","BBB.png");
 
       aws_values = {
 	'itemURL' : itemURL,
