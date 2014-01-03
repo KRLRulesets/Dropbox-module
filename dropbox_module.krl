@@ -10,7 +10,7 @@ Functions and actions for using Dropbox from a KRl ruleset.
     configure using app_key = "no key given" and
                     app_secret = "no secret given" 
 
-    provides create_oauth_header_value, raw_core_api_call, core_api_call, get_request_token, get_access_token, generate_authorization_url, decode_content, is_authorized, return_header
+    provides create_oauth_header_value, raw_core_api_call, core_api_call, get_request_token, get_access_token, generate_authorization_url, decode_content, is_authorized, return_header, raw_file_api_call
   }
 
   global {
@@ -46,6 +46,17 @@ Functions and actions for using Dropbox from a KRl ruleset.
     core_api_call = function(method, tokens) {
       result = raw_core_api_call(method, tokens);
       result{'content'}.decode();
+    }
+
+    raw_file_api_call = function(method, tokens) {
+      dropbox_content_url = "https://api-content.dropbox.com/1";
+      http:get(dropbox_content_url+method, 
+               {},
+               {"Authorization" : create_oauth_header_value(app_key, 
+	                                                    app_secret, 
+							    tokens{'access_token'}, 
+							    tokens{'access_token_secret'})
+	       });
     }
 
     get_request_token = defaction() {
