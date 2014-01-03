@@ -55,7 +55,8 @@ Functions and actions for using Dropbox from a KRl ruleset.
                {"Authorization" : create_oauth_header_value(app_key, 
 	                                                    app_secret, 
 							    tokens{'access_token'}, 
-							    tokens{'access_token_secret'})
+							    tokens{'access_token_secret'}),
+                "Accept-Charset" : "*"
 	       });
     }
 
