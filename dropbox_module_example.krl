@@ -54,7 +54,7 @@ Shows how to use the Dropbox module
 //                   "Range" : 'bytes=' + first_byte_offset + '-' + last_byte_offset
                });
 
-      value_debug
+      value
 
      }
 
