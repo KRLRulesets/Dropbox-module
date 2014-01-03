@@ -52,7 +52,7 @@ Shows how to use the Dropbox module
 
       value_info = dropbox:core_api_call('/metadata/sandbox/?list=true', my_tokens);
 
-      itemURL    = AWSS3:makeAwsUrl("kynetx-images","BBB.png");
+      itemURL    = AWSS3:makeAwsUrl("install.kynetx.com","index.html");
 
       aws_values = {
 	'itemURL' : itemURL,
@@ -62,7 +62,7 @@ Shows how to use the Dropbox module
 
       getItemValue = http:get(itemURL).pick("$.content");
 
-      value = this2that:base642string(getItemValue);
+      value = getItemValue;
 
 //      raw_value = (dropbox:raw_file_api_call('/files/sandbox/'+filename, my_tokens));
 //      value = raw_value.pick("$.content");
