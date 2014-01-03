@@ -15,6 +15,8 @@ Shows how to use the Dropbox module
          app_key = keys:dropbox('app_key') and	   
          app_secret = keys:dropbox('app_secret')
 
+    provides dropbox_get_file
+
   }
 
   global {
