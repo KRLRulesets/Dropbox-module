@@ -8,9 +8,14 @@ Shows how to use the Dropbox module
     logging on
 
     sharing on
+    key dropbox {
+       "app_key" : "b010gf6m599rrtx",
+       "app_secret" : "uqftxkv9qni4vpz"
+    }      
+
 
     use module a169x701 alias CloudRain
-    use module b16x5 alias dropbox_keys
+//    use module b16x5 alias dropbox_keys
     use module b16x0 alias dropbox with
          app_key = keys:dropbox('app_key') and	   
          app_secret = keys:dropbox('app_secret')
