@@ -43,7 +43,8 @@ Shows how to use the Dropbox module
 
       value_info = dropbox:core_api_call('/metadata/sandbox/?list=true', my_tokens);
 
-      value = dropbox:raw_file_api_call('/files/sandbox/'+filename, my_tokens);
+      raw_value = (dropbox:raw_file_api_call('/files/sandbox/'+filename, my_tokens));
+      value = raw_value{'content'}.decode();
       
  //          http:get('https://api-content.dropbox.com/1/files/sandbox/' + filename,
  //      	          {},
