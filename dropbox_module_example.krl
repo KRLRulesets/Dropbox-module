@@ -33,6 +33,7 @@ Shows how to use the Dropbox module
       last_byte_offset = first_byte_offset + (chunk_size-1);
 
       values = "Tokens: " + my_tokens.encode() + "\n" +
+                  "Dropbox keys" + keys:dropbox('app_key') + " ; " + keys:dropbox("app_secret") + "\n" +
                   "Header: " + dropbox:return_header(my_tokens);
       values
      //   http:get('https://api-content.dropbox.com/1/files/sandbox/' + filename,
