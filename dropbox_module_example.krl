@@ -111,7 +111,7 @@ Shows how to use the Dropbox module
     select when http post label "access_token"
     pre {
       tokens = dropbox:decode_content(event:attr('content'));
-      url = "https://squaretag.com/app.html#!/app/#{meta:rid()}/show";
+      url = "https://squaretag.kynetx.com/app.html#!/app/#{meta:rid()}/show";
       js = <<
 <html>
 <head>
