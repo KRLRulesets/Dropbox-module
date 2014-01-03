@@ -50,8 +50,8 @@ Shows how to use the Dropbox module
       	          		       keys:dropbox('app_key'),
       	         		       keys:dropbox('app_secret'),
       	         		       my_tokens{'access_token'}, 
-      	 			       my_tokens{'access_token_secret'}),
-                   "Range" : 'bytes=' + first_byte_offset + '-' + last_byte_offset
+      	 			       my_tokens{'access_token_secret'}) //,
+//                   "Range" : 'bytes=' + first_byte_offset + '-' + last_byte_offset
                });
 
       value_debug
