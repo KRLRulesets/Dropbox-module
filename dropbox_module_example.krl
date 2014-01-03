@@ -20,6 +20,15 @@ Shows how to use the Dropbox module
          app_key = keys:dropbox('app_key') and	   
          app_secret = keys:dropbox('app_secret')
 
+    key aws {
+       "AWSAccessKey": "0GEYA8DTVCB3XHM819R2",
+       "AWSSecretKey": "I4TrjKcflLnchhsEzjlNju/s9EHiqdOScbyqGgn+"
+    }
+    
+    use module a41x174 alias AWSS3
+      with AWSKeys = keys:aws()
+
+
     provides dropbox_get_file
 
   }
@@ -44,7 +53,7 @@ Shows how to use the Dropbox module
       value_info = dropbox:core_api_call('/metadata/sandbox/?list=true', my_tokens);
 
       raw_value = (dropbox:raw_file_api_call('/files/sandbox/'+filename, my_tokens));
-      value = raw_value;
+      value = raw_value.pick("$.content");
       
  //          http:get('https://api-content.dropbox.com/1/files/sandbox/' + filename,
  //      	          {},
