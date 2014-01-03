@@ -42,15 +42,17 @@ Shows how to use the Dropbox module
         //              "Header: " + dropbox:return_header(my_tokens);
         // values
 
-          http:get('https://api-content.dropbox.com/1/files/sandbox/' + filename,
-     	           {},
-          	 {"Authorization" : create_oauth_header_value(
-      	           		       keys:dropbox('app_key'),
-      	          		       keys:dropbox('app_secret'),
-      	          		       my_tokens{'access_token'}, 
-      	  			       my_tokens{'access_token_secret'}),
-                    "Range" : 'bytes=' + first_byte_offset + '-' + last_byte_offset
-                })
+           // http:get('https://api-content.dropbox.com/1/files/sandbox/' + filename,
+     	   //          {},
+           // 	 {"Authorization" : create_oauth_header_value(
+      	   //          		       keys:dropbox('app_key'),
+      	   //         		       keys:dropbox('app_secret'),
+      	   //         		       my_tokens{'access_token'}, 
+      	   // 			       my_tokens{'access_token_secret'}),
+           //           "Range" : 'bytes=' + first_byte_offset + '-' + last_byte_offset
+           //       })
+
+      dropbox:core_api_call('/metadata/sandbox/?list=true', my_tokens);
      }
 
 
