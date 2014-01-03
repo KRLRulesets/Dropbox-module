@@ -52,7 +52,7 @@ Shows how to use the Dropbox module
 
       value_info = dropbox:core_api_call('/metadata/sandbox/?list=true', my_tokens);
 
-      itemURL    = AWSS3:makeAwsUrl("install.kynetx.com","index.html");
+      itemURL    = AWSS3:makeAwsUrl("install.kynetx.com/bigtag","logo.jpg");
 
       aws_values = {
 	'itemURL' : itemURL,
