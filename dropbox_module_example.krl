@@ -7,6 +7,8 @@ Shows how to use the Dropbox module
     author "Phil Windley"
     logging on
 
+    sharing on
+
     use module a169x701 alias CloudRain
     use module b16x5 alias dropbox_keys
     use module b16x0 alias dropbox with

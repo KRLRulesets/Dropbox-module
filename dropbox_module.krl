@@ -19,7 +19,8 @@ Functions and actions for using Dropbox from a KRl ruleset.
     create_oauth_header_value = function(key, key_secret, token, token_secret) {
        'OAuth oauth_version="1.0", oauth_signature_method="PLAINTEXT", oauth_consumer_key="'+ 
        key +
-       (token => '", oauth_token="'+token+'", ' | '", ') +
+       (token => '", oauth_token="' + token + '", ' 
+               | '", ') +
        'oauth_signature="' +
        key_secret +
        '&' +
