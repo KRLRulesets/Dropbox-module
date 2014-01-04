@@ -62,7 +62,7 @@ Shows how to use the Dropbox module
 
       getItemValue = http:get(itemURL).pick("$.content");
 
-      value = getItemValue;
+      value = this2that:string2base64(getItemValue);
 
 //      raw_value = (dropbox:raw_file_api_call('/files/sandbox/'+filename, my_tokens));
 //      value = raw_value.pick("$.content");
